@@ -129,6 +129,17 @@ const Register = () => {
                   >
                     Register
                   </LoadingButton>
+                  <LoadingButton
+                    sx={{
+                      backgroundColor: "purple",
+                    }}
+                    type="submit"
+                    // loading={loading}
+                    loadingPosition="center"
+                    variant="contained"
+                  >
+                    Sign Up with Google
+                  </LoadingButton>
                 </Box>
               </Form>
             )}

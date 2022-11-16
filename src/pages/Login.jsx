@@ -37,15 +37,13 @@ const Login = () => {
         sx={{
           height: "100vh",
           p: 2,
-        
-
         }}
       >
         {/* <Grid item xs={12} mb={3}> */}
-          {/* <Typography variant="h3" color="primary" align="center"> */}
-            {/* STOCK APP */}
-          {/* </Typography> */}
-{/*            */}
+        {/* <Typography variant="h3" color="primary" align="center"> */}
+        {/* STOCK APP */}
+        {/* </Typography> */}
+        {/*            */}
         {/* </Grid> */}
         <Grid item xs={12} sm={10} md={6}>
           <Avatar
@@ -109,14 +107,25 @@ const Login = () => {
                     error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
                   />
-                   <LoadingButton
+                  <LoadingButton
                     type="submit"
                     // loading={loading}
                     loadingPosition="center"
                     variant="contained"
                   >
                     Submit
-                  </LoadingButton> 
+                  </LoadingButton>
+                  <LoadingButton
+                  sx={{
+                    backgroundColor:"red"
+                  }}
+                    type="submit"
+                    // loading={loading}
+                    loadingPosition="center"
+                    variant="contained"
+                  >
+                    Login with Google
+                  </LoadingButton>
                 </Box>
               </Form>
             )}
