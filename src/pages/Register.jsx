@@ -10,6 +10,7 @@ import { Formik, Form } from "formik";
 import { TextField } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import * as yup from "yup";
+import { signUpWithGoogle } from "../helpers/firebase";
 const loginSchema = yup.object().shape({
   email: yup
     .string()
@@ -26,7 +27,11 @@ const loginSchema = yup.object().shape({
     .matches(/[!,?{}><%&$#£+-.]+/, " Password must have a special char"),
 });
 const Register = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+  const handleGoogle=()=>{
+    signUpWithGoogle(navigate)
+  }
+
   // const { currentUser, error, loading } = useSelector((state) => state?.auth);
   return (
     <Container maxWidth="lg">
@@ -137,6 +142,7 @@ const Register = () => {
                     // loading={loading}
                     loadingPosition="center"
                     variant="contained"
+                    onClick={handleGoogle}
                   >
                     Sign Up with Google
                   </LoadingButton>

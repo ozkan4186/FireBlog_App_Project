@@ -28,6 +28,9 @@ const loginSchema = yup.object().shape({
 const Login = () => {
   const navigate = useNavigate();
   // const { currentUser, error, loading } = useSelector((state) => state?.auth);
+    const handleGoogle=()=>{
+    signUpWithGoogle(navigate)
+  }
   return (
     <Container maxWidth="lg">
       <Grid
@@ -123,6 +126,7 @@ const Login = () => {
                     // loading={loading}
                     loadingPosition="center"
                     variant="contained"
+                    onClick={handleGoogle}
                   >
                     Login with Google
                   </LoadingButton>
