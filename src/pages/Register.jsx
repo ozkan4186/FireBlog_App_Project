@@ -70,7 +70,7 @@ const Register = () => {
             Register
           </Typography>
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={{ email: "", password: "",username:"" }}
             validationSchema={loginSchema}
             onSubmit={(values, actions) => {
               //!login(values)
@@ -89,7 +89,7 @@ const Register = () => {
               <Form>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                   <TextField
-                    label="username"
+                    label="Username"
                     name="username"
                     id="username"
                     type="username"
@@ -131,6 +131,7 @@ const Register = () => {
                     // loading={loading}
                     loadingPosition="center"
                     variant="contained"
+                    
                   >
                     Register
                   </LoadingButton>

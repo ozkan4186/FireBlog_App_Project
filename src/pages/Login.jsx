@@ -10,6 +10,7 @@ import { Formik, Form } from "formik";
 import { TextField } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import * as yup from "yup";
+import { signUpWithGoogle } from "../helpers/firebase";
 const loginSchema = yup.object().shape({
   email: yup
     .string()

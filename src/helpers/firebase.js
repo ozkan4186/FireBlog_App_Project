@@ -47,7 +47,7 @@ export const createUser = async (email, password, navigate, displayName) => {
     await updateProfile(auth.currentUser, {
       displayName: displayName,
     });
-    navigate("/");
+    navigate("/login");
     toastSuccessNotify("Registered successfully!");
     // console.log(userCredential);
   } catch (error) {
