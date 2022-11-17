@@ -1,13 +1,18 @@
+import { ToastContainer } from "react-toastify";
 import AppRouter from "./app-router/AppRouter";
 import "./App.css";
 import Navbar from "./components/Navbar";
+import AuthContextProvider from "./context/AuthContext";
 
 
 function App() {
   return(
-    <div className="App">
-   <AppRouter/>
-    </div>
+   <AuthContextProvider>
+     <AppRouter/>
+     <ToastContainer/>
+   </AuthContextProvider>
+  
+    
   ) 
 }
 
