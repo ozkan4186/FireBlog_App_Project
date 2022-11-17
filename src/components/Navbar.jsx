@@ -12,12 +12,16 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { AuthContext } from "../context/AuthContext";
+
 import { Link } from "react-router-dom";
+
+import { AuthContext } from "../context/AuthContext";
 import { logOut } from "../helpers/firebase";
 
+
+
 const settings = ["Login", "Register"];
-const pages = ["Profile", "Logout", "NewBlog", "Dashboard"];
+const pages = ["Profile", "NewBlog", "Dashboard"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -111,7 +115,7 @@ function Navbar() {
             CodeAnka
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
-
+          
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -137,25 +141,36 @@ function Navbar() {
               {currentUser
                 ? pages.map((pages) => (
                     <MenuItem key={pages} onClick={handleCloseUserMenu}>
-                 <Link style={{ textDecoration: "none", color: "black" }} to= {`/${pages.toLowerCase()}`}  ><Typography textAlign="center">{pages}</Typography></Link>     
+                      <Link
+                        to={`/${pages.toLocaleLowerCase()}`}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        <Typography textAlign="center">{pages}</Typography>{" "}
+                      </Link>
                     </MenuItem>
                   ))
                 : settings.map((setting) => (
                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                 <Link style={{ textDecoration: "none", color: "black" }} to= {`/${setting.toLowerCase()}`}  ><Typography textAlign="center">{setting}</Typography></Link>     
+                      <Link
+                        to={`/${setting.toLocaleLowerCase()}`}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        <Typography textAlign="center">{setting}</Typography>
+                      </Link>
                     </MenuItem>
                   ))}
-                <MenuItem onClick={handleCloseUserMenu}>
-                <Link
-                  to="/"
-                  onClick={() => {
-                    logOut(false);
-                  }}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <Typography textAlign="center">Logaout</Typography>
-                </Link>
-              </MenuItem>
+             {currentUser &&  <MenuItem onClick={handleCloseUserMenu}>
+                    <Link
+                      to="/"
+                      onClick={() => {
+                        logOut();
+                      }}
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+                      <Typography textAlign="center">Logout</Typography>
+                    </Link>
+                  </MenuItem>}
+            
 
             </Menu>
           </Box>
