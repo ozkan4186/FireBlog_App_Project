@@ -2,15 +2,15 @@ import firebase from './firebase'
 import { getDatabase, onValue, push, ref, remove, set, update } from 'firebase/database'
 import { useEffect, useState } from 'react';
 
-export const AddUser =(value)=>{
+export const AddUser =(newblogInput)=>{
     const db = getDatabase();
     const userRef = ref(db,'baglanti');
     const newUserRef = push(userRef)
     set((newUserRef),{
-        name:value.name,
-        phone:value.phone, //!dikkart
-        gender:value.gender,
-
+        title:newblogInput.title,
+        photoUrl:newblogInput.photoUrl, //!dikkart
+        content:newblogInput.content,
+        email:newblogInput.email
     })
 }
 
