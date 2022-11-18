@@ -1,39 +1,46 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, TextareaAutosize } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { AddUser } from "../helpers/function";
 
 
+
+
+
+
 const NewBlog = () => {
-  const { currentUser } = useContext(AuthContext);
+ const {currentUser} = useContext(AuthContext)
+  const initialValue={
+    title:"",
+photoUrl:"",
+content:"",
+email:currentUser.email
+  }
+  const [newData, setNewData] = useState(initialValue)
+ 
 
-  // console.log(currentUser)
 
-  const [newblogInput, setNewblogInput] = useState({
-    title: "",
-    photoUrl: "",
-    content: "",
-    email: currentUser.email,
-  });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+
+
+
+
+
+const handleChange = (e)=>{
+    const { name, value } = e.target;
     console.log(name, value);
-    setNewblogInput({ ...value, [name]: value });
-  };
-  const handleSubmit = (e) => {
-    console.log("sasasa")
-    e.preventDefault();
+    setNewData({ ...newData, [name]: value });
+}
 
-    AddUser(newblogInput);
-  };
+const handleClick=(e)=>{
+  e.preventDefault()
+  AddUser(newData)
+  console.log("tıktıktık");
+}
 
   return (
     <Box
-      noValidate
-      autoComplete="off"
-      component="form"
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -44,7 +51,10 @@ const NewBlog = () => {
         margin: "auto",
         alignItems: "center",
         marginTop: "3rem",
+       
       }}
+       noValidate
+      autoComplete="off"
     >
       <img
         width="300px"
@@ -57,7 +67,7 @@ const NewBlog = () => {
         variant="outlined"
         margin="normal"
         name="title"
-        value={newblogInput.title}
+        value={newData.title}
         onChange={handleChange}
         sx={{ width: "400px" }}
       />
@@ -67,8 +77,8 @@ const NewBlog = () => {
         variant="outlined"
         margin="normal"
         name="photoUrl"
+        value={newData.photoUrl}
         onChange={handleChange}
-        value={newblogInput.photoUrl}
         sx={{ width: "400px" }}
       />
       <TextField
@@ -77,7 +87,7 @@ const NewBlog = () => {
         variant="outlined"
         margin="normal"
         name="content"
-        value={newblogInput.content}
+        value={newData.content}
         onChange={handleChange}
         sx={{
           width: "400px",
@@ -86,12 +96,8 @@ const NewBlog = () => {
           },
         }}
       />
-      <Button
-        onClick={handleSubmit}
-        type="submit"
-        sx={{ width: "400px" }}
-        variant="contained"
-      >
+      <Button onClick={handleClick} 
+      sx={{ width: "400px" }} variant="contained">
         Submit
       </Button>
     </Box>
