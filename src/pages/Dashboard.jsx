@@ -1,11 +1,56 @@
-import React from 'react'
+import React, { useContext } from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { AuthContext } from "../context/AuthContext";
+import { GetUser } from "../helpers/function";
+import { useParams } from "react-router";
 
-const Dashboard = () => {
+export default function Dashboard() {
+  const { contactList } = GetUser();
+  const { id } = useParams();
+  console.log(id);
+  console.log(contactList);
   return (
-    <div>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit, ut iure sint culpa beatae obcaecati, molestias dignissimos voluptatibus voluptatem voluptate soluta enim fugit ducimus eos magni aut harum dolore maiores iste, nobis sunt adipisci earum debitis. Blanditiis porro eos et qui, sunt quo repellat, minima, saepe ab eveniet dolore ut molestiae sed totam provident? Exercitationem amet eum asperiores dolores neque explicabo blanditiis beatae. Ex, sit enim veniam numquam quidem sed quos neque saepe et iusto dignissimos corrupti fuga vel, velit possimus nisi vitae sapiente ut voluptatum eos eveniet consequatur doloremque aut. Quidem nobis optio cupiditate saepe iste! Aperiam, consequuntur beatae?
-    </div>
-  )
-}
+    <Card sx={{ maxWidth: 600,    display: 'inline-flex',
+          m: "2rem",
+           mx: 'auto' ,
+         
 
-export default Dashboard
+          p: 3,flexWrap: 'wrap' , justifyContent: 'space-evenly', alignItems: 'center',
+    }}>
+      {contactList?.map((item,id) => {
+        return (
+          <div key={id} sx={{
+            m:2
+          }} >
+            <CardMedia
+              component="img"
+              height="140"
+              image={item.photoUrl}
+              alt="green iguana"
+        
+          
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {item.title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+              {item.content}
+                 {item.email}
+              </Typography>
+            </CardContent>
+            <CardActions>
+               <Button size="small">update</Button>
+              <Button size="small">delete</Button>
+            </CardActions>
+          </div>
+        );
+      })}
+    </Card>
+  );
+}

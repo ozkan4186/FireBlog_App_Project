@@ -1,43 +1,32 @@
 import { Box, Button, TextareaAutosize } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useContext, useState } from "react";
+import { Navigate, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { AddUser } from "../helpers/function";
 
-
-
-
-
-
 const NewBlog = () => {
- const {currentUser} = useContext(AuthContext)
-  const initialValue={
-    title:"",
-photoUrl:"",
-content:"",
-email:currentUser.email
-  }
-  const [newData, setNewData] = useState(initialValue)
- 
+  const { currentUser } = useContext(AuthContext);
+  console.log( currentUser)
+  const initialValue = {
+    title: "",
+    photoUrl: "",
+    content: "",
+    email: currentUser.email,
+  };
+  const [newData, setNewData] = useState(initialValue);
 
-
-
-
-
-
-
-
-const handleChange = (e)=>{
+  const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
     setNewData({ ...newData, [name]: value });
-}
-
-const handleClick=(e)=>{
-  e.preventDefault()
-  AddUser(newData)
-  console.log("tıktıktık");
-}
+  };
+const navigate=useNavigate()
+  const handleClick = (e) => {
+    e.preventDefault();
+    AddUser(newData);
+    navigate("/")
+  };
 
   return (
     <Box
@@ -51,9 +40,8 @@ const handleClick=(e)=>{
         margin: "auto",
         alignItems: "center",
         marginTop: "3rem",
-       
       }}
-       noValidate
+      noValidate
       autoComplete="off"
     >
       <img
@@ -96,8 +84,7 @@ const handleClick=(e)=>{
           },
         }}
       />
-      <Button onClick={handleClick} 
-      sx={{ width: "400px" }} variant="contained">
+      <Button onClick={handleClick} sx={{ width: "400px" }} variant="contained">
         Submit
       </Button>
     </Box>

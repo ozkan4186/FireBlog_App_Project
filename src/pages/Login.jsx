@@ -10,7 +10,8 @@ import { Formik, Form } from "formik";
 import { TextField } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import * as yup from "yup";
-import { signUpWithGoogle } from "../helpers/firebase";
+import { signIn, signUpWithGoogle } from "../helpers/firebase";
+import { useState } from "react";
 const loginSchema = yup.object().shape({
   email: yup
     .string()
@@ -28,6 +29,23 @@ const loginSchema = yup.object().shape({
 });
 const Login = () => {
   const navigate = useNavigate();
+  const initialInfo={
+    email:"",
+    password:""
+  }
+  const [userLogin, setUserLogin] = useState(initialInfo)
+
+  const handleChangeLogin=(e)=>{
+    e.preventDefault()
+    const{name,value}=e.target
+    setUserLogin({
+      ...userLogin,[name]:value
+    })
+    console.log(userLogin)
+  }
+  const firebaseLogin=()=>{
+    signIn(userLogin.email,userLogin.password, navigate)
+  }
   // const { currentUser, error, loading } = useSelector((state) => state?.auth);
     const handleGoogle=()=>{
     signUpWithGoogle(navigate)
@@ -69,7 +87,7 @@ const Login = () => {
             Login
           </Typography>
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={userLogin}
             validationSchema={loginSchema}
             onSubmit={(values, actions) => {
               //!login(values)
@@ -93,8 +111,8 @@ const Login = () => {
                     id="email"
                     type="email"
                     variant="outlined"
-                    value={values.email}
-                    onChange={handleChange}
+                    value={userLogin.email}
+                    onChange={handleChangeLogin}
                     onBlur={handleBlur}
                     error={touched.email && Boolean(errors.email)}
                     helperText={touched.email && errors.email}
@@ -105,8 +123,8 @@ const Login = () => {
                     id="password"
                     type="password"
                     variant="outlined"
-                    value={values.password}
-                    onChange={handleChange}
+                    value={userLogin.password}
+                    onChange={handleChangeLogin}
                     onBlur={handleBlur}
                     error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
@@ -116,6 +134,7 @@ const Login = () => {
                     // loading={loading}
                     loadingPosition="center"
                     variant="contained"
+                    onClick={firebaseLogin}
                   >
                     Submit
                   </LoadingButton>
