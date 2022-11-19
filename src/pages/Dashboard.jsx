@@ -6,19 +6,26 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { AuthContext } from "../context/AuthContext";
-import { GetUser } from "../helpers/function";
-import { useParams } from "react-router";
+import { DeleteUser, GetUser } from "../helpers/function";
+import { useNavigate, useParams } from "react-router";
 
 export default function Dashboard() {
+  const{currentUser}=useContext(AuthContext)
+  const navigate=useNavigate()
   const { contactList } = GetUser();
   const { id } = useParams();
   console.log(id);
   console.log(contactList);
+  const handleClick=(e)=>{
+    e.preventDefault()
+    navigate("/details")
+  }
   return (
-    <Card sx={{ maxWidth: 600,    display: 'inline-flex',
+    <Card onClick={handleClick} sx={{ maxWidth: 600,    display: 'inline-flex',
           m: "2rem",
            mx: 'auto' ,
          
+        
 
           p: 3,flexWrap: 'wrap' , justifyContent: 'space-evenly', alignItems: 'center',
     }}>
@@ -45,8 +52,8 @@ export default function Dashboard() {
               </Typography>
             </CardContent>
             <CardActions>
-               <Button size="small">update</Button>
-              <Button size="small">delete</Button>
+          
+          
             </CardActions>
           </div>
         );
