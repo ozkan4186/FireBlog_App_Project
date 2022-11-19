@@ -12,46 +12,49 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import * as yup from "yup";
 import { signIn, signUpWithGoogle } from "../helpers/firebase";
 import { useState } from "react";
-const loginSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email("Please enter valid email")
-    .required("Please  enter an email"),
-  password: yup
-    .string()
-    .required("Please enter a password ")
-    .min(8, "Password must have min 8 chars")
-    .max(16, "Password must have max 16 chars")
-    .matches(/\d+/, "Password must have a number")
-    .matches(/[a-z]+/, "Password must have a lowercase")
-    .matches(/[A-Z]+/, "Password must have an uppercase")
-    .matches(/[!,?{}><%&$#£+-.]+/, " Password must have a special char"),
-});
+// const loginSchema = yup.object().shape({
+// email: yup
+// .string()
+// .email("Please enter valid email")
+// .required("Please  enter an email"),
+// password: yup
+// .string()
+// .required("Please enter a password ")
+// .min(8, "Password must have min 8 chars")
+// .max(16, "Password must have max 16 chars")
+// .matches(/\d+/, "Password must have a number")
+// .matches(/[a-z]+/, "Password must have a lowercase")
+// .matches(/[A-Z]+/, "Password must have an uppercase")
+// .matches(/[!,?{}><%&$#£+-.]+/, " Password must have a special char"),
+// });
 const Login = () => {
   const navigate = useNavigate();
-  const initialInfo={
-    email:"",
-    password:""
-  }
-  const [userLogin, setUserLogin] = useState(initialInfo)
+  const initialInfo = {
+    email: "",
+    password: "",
+  };
+  const [userLogin, setUserLogin] = useState(initialInfo);
 
-  const handleChangeLogin=(e)=>{
-    e.preventDefault()
-    const{name,value}=e.target
+  const handleChangeLogin = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
     setUserLogin({
-      ...userLogin,[name]:value
-    })
-    console.log(userLogin)
-  }
-  const firebaseLogin=()=>{
-    signIn(userLogin.email,userLogin.password, navigate)
-  }
+      ...userLogin,
+      [name]: value,
+    });
+    console.log(userLogin);
+  };
+  const firebaseLogin = () => {
+    signIn(userLogin.email, userLogin.password, navigate);
+  };
   // const { currentUser, error, loading } = useSelector((state) => state?.auth);
-    const handleGoogle=()=>{
-    signUpWithGoogle(navigate)
-  }
+  const handleGoogle = () => {
+    signUpWithGoogle(navigate);
+  };
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg " sx={{
+      marginTop:"10rem"
+    }} >
       <Grid
         container
         justifyContent="center"
@@ -61,12 +64,6 @@ const Login = () => {
           p: 2,
         }}
       >
-        {/* <Grid item xs={12} mb={3}> */}
-        {/* <Typography variant="h3" color="primary" align="center"> */}
-        {/* STOCK APP */}
-        {/* </Typography> */}
-        {/*            */}
-        {/* </Grid> */}
         <Grid item xs={12} sm={10} md={6}>
           <Avatar
             sx={{
@@ -88,7 +85,7 @@ const Login = () => {
           </Typography>
           <Formik
             initialValues={userLogin}
-            validationSchema={loginSchema}
+            // validationSchema={loginSchema}
             onSubmit={(values, actions) => {
               //!login(values)
               actions.resetForm();
@@ -139,9 +136,9 @@ const Login = () => {
                     Submit
                   </LoadingButton>
                   <LoadingButton
-                  sx={{
-                    backgroundColor:"red"
-                  }}
+                    sx={{
+                      backgroundColor: "red",
+                    }}
                     type="submit"
                     // loading={loading}
                     loadingPosition="center"

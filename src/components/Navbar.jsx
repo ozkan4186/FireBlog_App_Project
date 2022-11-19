@@ -44,11 +44,12 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar position="fixed">
+      <Container maxWidth="xxl"  className="navbar">
         <Toolbar disableGutters>
           <Typography
             variant="h6"
+          
             noWrap
             component="a"
             href="/"
@@ -58,11 +59,14 @@ function Navbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              // color: "inherit",
               textDecoration: "none",
+              padding:"2rem",
+              fontSize:"3rem",
+           
             }}
           >
-            CodeAnka
+            MADEBY_ÖZKAN
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -112,7 +116,7 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            CodeAnka
+            ANKATEAM
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
           

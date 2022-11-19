@@ -13,21 +13,21 @@ import * as yup from "yup";
 
 import { useState } from "react";
 import { createUser, signUpWithGoogle } from "../helpers/firebase";
-const loginSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email("Please enter valid email")
-    .required("Please  enter an email"),
-  password: yup
-    .string()
-    .required("Please enter a password ")
-    .min(8, "Password must have min 8 chars")
-    .max(16, "Password must have max 16 chars")
-    .matches(/\d+/, "Password must have a number")
-    .matches(/[a-z]+/, "Password must have a lowercase")
-    .matches(/[A-Z]+/, "Password must have an uppercase")
-    .matches(/[!,?{}><%&$#£+-.]+/, " Password must have a special char"),
-});
+// const loginSchema = yup.object().shape({
+  // email: yup
+    // .string()
+    // .email("Please enter valid email")
+    // .required("Please  enter an email"),
+  // password: yup
+    // .string()
+    // .required("Please enter a password ")
+    // .min(8, "Password must have min 8 chars")
+    // .max(16, "Password must have max 16 chars")
+    // .matches(/\d+/, "Password must have a number")
+    // .matches(/[a-z]+/, "Password must have a lowercase")
+    // .matches(/[A-Z]+/, "Password must have an uppercase")
+    // .matches(/[!,?{}><%&$#£+-.]+/, " Password must have a special char"),
+// });
 const Register = () => {
   const navigate = useNavigate();
   // const { currentUser, error, loading } = useSelector((state) => state?.auth);
@@ -99,7 +99,7 @@ const Register = () => {
           </Typography>
           <Formik
             initialValues={userInfo}
-            validationSchema={loginSchema}
+            // validationSchema={loginSchema}
             onSubmit={(values, actions) => {
               //!login(values)
               actions.resetForm();

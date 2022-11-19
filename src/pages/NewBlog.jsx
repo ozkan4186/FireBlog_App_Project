@@ -7,7 +7,7 @@ import { AddUser } from "../helpers/function";
 
 const NewBlog = () => {
   const { currentUser } = useContext(AuthContext);
-  console.log( currentUser)
+  console.log(currentUser);
   const initialValue = {
     title: "",
     photoUrl: "",
@@ -21,11 +21,11 @@ const NewBlog = () => {
     console.log(name, value);
     setNewData({ ...newData, [name]: value });
   };
-const navigate=useNavigate()
+  const navigate = useNavigate();
   const handleClick = (e) => {
     e.preventDefault();
     AddUser(newData);
-    navigate("/")
+    navigate("/");
   };
 
   return (

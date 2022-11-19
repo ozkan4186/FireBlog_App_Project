@@ -8,56 +8,57 @@ import Typography from "@mui/material/Typography";
 import { AuthContext } from "../context/AuthContext";
 import { DeleteUser, GetUser } from "../helpers/function";
 import { useNavigate, useParams } from "react-router";
+import { Container } from "@mui/system";
 
 export default function Dashboard() {
-  const{currentUser}=useContext(AuthContext)
-  const navigate=useNavigate()
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const { contactList } = GetUser();
-  const { id } = useParams();
-  console.log(id);
-  console.log(contactList);
-  const handleClick=(e)=>{
-    e.preventDefault()
-    navigate("/details")
-  }
-  return (
-    <Card onClick={handleClick} sx={{ maxWidth: 600,    display: 'inline-flex',
-          m: "2rem",
-           mx: 'auto' ,
-         
-        
 
-          p: 3,flexWrap: 'wrap' , justifyContent: 'space-evenly', alignItems: 'center',
-    }}>
-      {contactList?.map((item,id) => {
+  console.log(contactList);
+  const handleClick = (e) => {
+    e.preventDefault();
+    navigate("/details");
+  };
+  return (
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        gap: "2rem",
+        flexWrap: "wrap",
+        marginTop: "20rem",
+        padding:"2rem",
+     
+        margin:"auto"
+      }}
+    >
+      {contactList?.map((item) => {
         return (
-          <div key={id} sx={{
-            m:2
+          <Card sx={{
+            marginTop:"10rem"
           }} >
             <CardMedia
               component="img"
               height="140"
               image={item.photoUrl}
               alt="green iguana"
-        
-          
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 {item.title}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-              {item.content}
-                 {item.email}
+                {item.content}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {item.email}
               </Typography>
             </CardContent>
-            <CardActions>
-          
-          
-            </CardActions>
-          </div>
+            <CardActions></CardActions>
+          </Card>
         );
       })}
-    </Card>
+    </Container>
   );
 }
