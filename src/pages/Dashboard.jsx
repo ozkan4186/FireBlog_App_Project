@@ -1,61 +1,113 @@
-import React, { useContext } from "react";
+import * as React from "react";
+import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { AuthContext } from "../context/AuthContext";
-import { DeleteUser, GetUser } from "../helpers/function";
-import { useNavigate, useParams } from "react-router";
+import { red } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Container } from "@mui/system";
+import { GetUser } from "../helpers/function";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
 
-export default function Dashboard() {
-  const { currentUser } = useContext(AuthContext);
-  const navigate = useNavigate();
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
+export default function RecipeReviewCard() {
+  const [expanded, setExpanded] = React.useState(false);
+  const navigate=useNavigate()
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
   const { contactList } = GetUser();
 
-  console.log(contactList);
-  const handleClick = (e) => {
-    e.preventDefault();
-    navigate("/details");
-  };
+  const handleDetails=(e)=>{
+    e.preventDefault()
+   
+
+
+  }
   return (
     <Container
       sx={{
         display: "flex",
         justifyContent: "center",
-        gap: "2rem",
+        gap: "3rem",
         flexWrap: "wrap",
-        marginTop: "20rem",
-        padding:"2rem",
-     
-        margin:"auto"
       }}
     >
-      {contactList?.map((item) => {
+      {contactList?.map((item,id) => {
         return (
-          <Card sx={{
-            marginTop:"10rem"
-          }} >
+          <Card key={id} sx={{ maxWidth: 345, marginTop: "10rem", cursor: "pointer" }}>
+            <CardHeader
+              avatar={
+                <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                  R
+                </Avatar>
+              }
+              action={
+                <IconButton aria-label="settings">
+                  <MoreVertIcon />
+                </IconButton>
+              }
+              title={item.title}
+            />
             <CardMedia
               component="img"
-              height="140"
+              height="194"
               image={item.photoUrl}
-              alt="green iguana"
+              alt="Paella dish"
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {item.title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {item.content}
-              </Typography>
               <Typography variant="body2" color="text.secondary">
                 {item.email}
               </Typography>
             </CardContent>
-            <CardActions></CardActions>
+            <CardActions disableSpacing>
+              <IconButton aria-label="add to favorites">
+                <FavoriteIcon />
+              </IconButton>
+              <IconButton aria-label="share">
+                <ShareIcon />
+              </IconButton>
+              <Button onClick={()=> navigate(`details/${item.id}`,{state:item})} variant="contained" color="warning" sx={{
+                marginLeft:"3rem"
+              }} >
+                Details
+              </Button>
+              <ExpandMore
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon />
+              </ExpandMore>
+            </CardActions>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <CardContent>
+                <Typography paragraph>Content:</Typography>
+                <Typography paragraph>{item.content}</Typography>
+              </CardContent>
+            </Collapse>
           </Card>
         );
       })}

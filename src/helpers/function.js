@@ -16,7 +16,7 @@ export const AddUser = (value) => {
   const newUserRef = push(userRef);
   set(newUserRef, {
     title: value.title,
-    photoUrl: value.photoUrl, //!dikkart
+    photoUrl: value.photoUrl, 
     content: value.content,
     email:value.email,
   });

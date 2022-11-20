@@ -9,7 +9,7 @@ import { AuthContext } from '../context/AuthContext';
 export default function ActionAreaCard() {
     const { currentUser } = useContext(AuthContext);
   return (
-    <Card sx={{ maxWidth: 345,mx:"auto" }}>
+    <Card sx={{ maxWidth: 345,marginTop:"10rem",mx:"auto"}}>
       <CardActionArea>
         <CardMedia
           component="img"
