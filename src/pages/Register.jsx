@@ -56,7 +56,9 @@ const Register = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{
+      marginTop:"10rem"
+    }} >
       <Grid
         container
         justifyContent="center"
