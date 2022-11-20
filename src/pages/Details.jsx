@@ -1,4 +1,4 @@
-import  React, { useContext } from "react";
+import React, { useContext } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -14,10 +14,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useLocation, useParams } from "react-router";
+import { Navigate, useLocation, useNavigate, useParams } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { Button } from "@mui/material";
 import { Container } from "@mui/system";
+import { DeleteUser } from "../helpers/function";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -32,7 +33,8 @@ const ExpandMore = styled((props) => {
 
 export default function RecipeReviewCard() {
   const [expanded, setExpanded] = React.useState(false);
-  const{currentUser}=useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext);
+  const navigate=useNavigate()
   const { id } = useParams();
   console.log(id);
   const { state } = useLocation();
@@ -42,7 +44,14 @@ export default function RecipeReviewCard() {
     setExpanded(!expanded);
     e.preventDefault();
   };
+  const handleDelete=()=>{
+    DeleteUser(state.id)
+    navigate(-1)
+  }
 
+  const handleEdit=()=>{
+  navigate("/updateblog",{state:state})
+}
   return (
     <Card
       sx={{ maxWidth: 1000, maxHeight: 1000, marginTop: "10rem", mx: "auto" }}
@@ -68,9 +77,7 @@ export default function RecipeReviewCard() {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-        
-        {state.email}
-        
+          {state.email}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -80,37 +87,24 @@ export default function RecipeReviewCard() {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-          
-       
-       
-       
-       
-       
-       
 
-        {currentUser.email===state.email && (
-        
+        {currentUser.email === state.email && (
           <Container>
+            <Button
+            onClick={handleEdit}
+              sx={{
+                margin: "2rem",
+              }}
+              variant="contained"
+            >
+              Update
+            </Button>
+            <Button  onClick={handleDelete} color="error" variant="contained">
+              Delete
+            </Button>
+          </Container>
+        )}
 
-        
-               <Button  sx={{
-       margin:"2rem"
-     }} variant="contained">Update</Button>
-     <Button  color="error" variant="contained">
-       Delete
-     </Button>
-       </Container>
-          
-        )} 
-     
-     
-     
-     
-     
-     
-     
-        
-      
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

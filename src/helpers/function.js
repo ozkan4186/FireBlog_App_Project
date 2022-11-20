@@ -9,6 +9,7 @@ import {
   update,
 } from "firebase/database";
 import { useEffect, useState } from "react";
+import { toastWarnNotify } from "./toastNotify";
 
 export const AddUser = (value) => {
   const db = getDatabase();
@@ -44,7 +45,7 @@ export const DeleteUser = (id) => {
   const userRef = ref(db, "baglanti");
   remove(ref(db, "baglanti/" + id));
 
-  // Toastify("Kullanıcı bilgisi silindi")
+  toastWarnNotify("Kullanıcı bilgisi silindi")
 };
 
 export const EditUser = (value) => {
