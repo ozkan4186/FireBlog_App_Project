@@ -57,7 +57,7 @@ const Register = () => {
 
   return (
     <Container maxWidth="lg" sx={{
-      marginTop:"10rem"
+      marginTop:"15rem"
     }} >
       <Grid
         container
