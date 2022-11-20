@@ -9,7 +9,7 @@ import {
   update,
 } from "firebase/database";
 import { useEffect, useState } from "react";
-import { toastWarnNotify } from "./toastNotify";
+import { toastSuccessNotify, toastWarnNotify } from "./toastNotify";
 
 export const AddUser = (value) => {
   const db = getDatabase();
@@ -54,4 +54,5 @@ export const EditUser = (value) => {
 
   updates["baglanti/" + value.id] = value;
   return update(ref(db), updates);
+  toastSuccessNotify("new blog editlendi")
 };
