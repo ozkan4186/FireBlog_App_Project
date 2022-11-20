@@ -33,7 +33,7 @@ const UpdateBlog = () => {
         borderRadius: "20px",
         margin: "auto",
         alignItems: "center",
-        marginTop: "3rem",
+        marginTop: "10rem",
       }}
       noValidate
       autoComplete="off"
