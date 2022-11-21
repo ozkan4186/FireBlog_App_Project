@@ -13,6 +13,8 @@ const NewBlog = () => {
     photoUrl: "",
     content: "",
     email: currentUser.email,
+    like:0,
+    likeFlag:false
   };
   const [newData, setNewData] = useState(initialValue);
 

@@ -20,6 +20,8 @@ export const AddUser = (value) => {
     photoUrl: value.photoUrl, 
     content: value.content,
     email:value.email,
+    like:value.like,
+    likeFlag:false
   });
 };
 

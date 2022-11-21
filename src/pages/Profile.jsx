@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { AuthContext } from '../context/AuthContext';
+import icon from "../assets/icones.jpeg"
 
 export default function ActionAreaCard() {
     const { currentUser } = useContext(AuthContext);
@@ -14,8 +15,11 @@ export default function ActionAreaCard() {
         <CardMedia
           component="img"
           height="140"
-          image={currentUser?.photoURL}
+          image={icon}
           alt="green iguana"
+          sx={{
+            height:""
+          }}
      
         />
         <CardContent>

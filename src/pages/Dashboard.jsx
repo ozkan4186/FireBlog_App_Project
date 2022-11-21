@@ -15,7 +15,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Container } from "@mui/system";
-import { GetUser } from "../helpers/function";
+import { AddUser, GetUser } from "../helpers/function";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 
@@ -39,8 +39,10 @@ export default function RecipeReviewCard() {
   };
   const { contactList } = GetUser();
 
-  const handleDetails=(e)=>{
-    e.preventDefault()
+  const handleClick=(data)=>{
+    AddUser(data)
+    console.log(data)
+   
    
 
 
@@ -60,7 +62,7 @@ export default function RecipeReviewCard() {
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                  R
+                  ö
                 </Avatar>
               }
               action={
@@ -83,7 +85,7 @@ export default function RecipeReviewCard() {
             </CardContent>
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
-                <FavoriteIcon sx={{
+                <FavoriteIcon onClick={()=>handleClick(item.data)} sx={{
                   color:"red"
                 }} />
               </IconButton>
@@ -92,7 +94,7 @@ export default function RecipeReviewCard() {
               </IconButton>
               <Button onClick={()=> navigate(`details/${item.id}`,{state:item})} variant="contained" color="warning" sx={{
                 marginLeft:"3rem"
-              }} >
+              }}>
                 Details
               </Button>
               <ExpandMore

@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import icon from "../assets/icones.jpeg"
 
 import { Link } from "react-router-dom";
 
@@ -70,7 +71,7 @@ function Navbar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            {/* <IconButton
+             <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -79,14 +80,14 @@ function Navbar() {
               color="inherit"
             >
               <MenuIcon />
-            </IconButton> */}
+            </IconButton> 
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
+               anchorOrigin={{
+               vertical: "bottom",
+               horizontal: "left",
+               }}
               keepMounted
               transformOrigin={{
                 vertical: "top",
@@ -118,12 +119,14 @@ function Navbar() {
           >
             ANKATEAM
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+
+          </Box>
           
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={icon} />
               </IconButton>
             </Tooltip>
             <Menu
